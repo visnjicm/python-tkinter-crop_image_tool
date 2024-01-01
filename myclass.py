@@ -7,6 +7,8 @@ class MyTkImage:
         self.fp = fp
         self.pil = Image.open(fp)
         self.tk_img = ImageTk.PhotoImage(Image.open(fp))
+        self.x = 0
+        self.y = 0
 
     def update_tk(self):
         self.tk_img = ImageTk.PhotoImage(self.pil)
@@ -17,9 +19,9 @@ class MyTkImage:
         self.pil = self.pil.resize((width, height))
         self.update_tk()
 
-    def zoom_out(self, factor: int):
-        width = self.pil.width // factor
-        height = self.pil.height // factor
+    def zoom_out(self, factor: float):
+        width = round(float(self.pil.width) / factor)
+        height = round(float(self.pil.height) / factor)
         self.pil = self.pil.resize((width, height))
         self.update_tk()
 
