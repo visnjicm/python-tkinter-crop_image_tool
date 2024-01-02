@@ -1,5 +1,6 @@
 import tkinter as tk
 from myclass import MyTkImage
+from datetime import datetime
 
 def update_canvas(x,y):
     canvas.delete('background')
@@ -9,11 +10,11 @@ def update_canvas(x,y):
 
 def KeyPress(event):
     if event.char == '-':
-        img.zoom_out(1.1)
+        img.zoom_out(1.3)
         update_canvas(img.x, img.y)
 
     if event.char == '=':
-        img.zoom_in(1.1)
+        img.zoom_in(1.3)
         update_canvas(img.x, img.y)
 
     if event.char == '0':
@@ -21,19 +22,19 @@ def KeyPress(event):
         update_canvas(img.x, img.y)
 
 def WKey(event):
-    img.y = img.y  + 10
+    img.y = img.y  + 50
     update_canvas(img.x, img.y)
 
 def AKey(event):
-    img.x = img.x - 10
+    img.x = img.x - 50
     update_canvas(img.x, img.y)
 
 def SKey(event):
-    img.y = img.y - 10
+    img.y = img.y - 50
     update_canvas(img.x, img.y)
 
 def DKey(event):
-    img.x = img.x + 10
+    img.x = img.x + 50
     update_canvas(img.x, img.y)
 
 def LeftClick(event):
@@ -44,6 +45,14 @@ def LeftClick(event):
 def MiddleClick(event):
     print(event)
     canvas.create_rectangle(img.rect_x0, img.rect_y0, img.rect_x1, img.rect_y1)
+    print(img.rect_x0,img.rect_y0,img.rect_x1,img.rect_y1)
+    print(img.x, img.y)
+    cropped_coordinates = (img.rect_x0-img.x, img.rect_y0-img.y, \
+                           img.rect_x1-img.x, img.rect_y1-img.y)
+    new_img = img.pil.crop(cropped_coordinates)
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    file_path = f"files/output_{timestamp}.png"
+    new_img.save(fp=file_path)
 
 def RightClick(event):
     print(event)
