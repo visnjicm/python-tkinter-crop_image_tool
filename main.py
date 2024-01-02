@@ -36,6 +36,20 @@ def DKey(event):
     img.x = img.x + 10
     update_canvas(img.x, img.y)
 
+def LeftClick(event):
+    print(event)
+    img.rect_x0 = event.x
+    img.rect_y0 = event.y
+
+def MiddleClick(event):
+    print(event)
+    canvas.create_rectangle(img.rect_x0, img.rect_y0, img.rect_x1, img.rect_y1)
+
+def RightClick(event):
+    print(event)
+    img.rect_x1 = event.x
+    img.rect_y1 = event.y
+
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -45,6 +59,10 @@ if __name__ == "__main__":
     root.bind("<a>", AKey)
     root.bind("<s>", SKey)
     root.bind("<d>", DKey)
+
+    root.bind("<Button-1>", LeftClick)
+    root.bind("<Button-2>", MiddleClick)
+    root.bind("<Button-3>", RightClick)
 
     root.bind('<KeyPress>', KeyPress)
     canvas = tk.Canvas(root, width=1280, height=720)

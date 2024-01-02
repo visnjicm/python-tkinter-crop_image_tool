@@ -9,6 +9,10 @@ class MyTkImage:
         self.tk_img = ImageTk.PhotoImage(Image.open(fp))
         self.x = 0
         self.y = 0
+        self.rect_x0 = 0
+        self.rect_x1 = 100
+        self.rect_y0 = 0
+        self.rect_y1 = 100
 
     def update_tk(self):
         self.tk_img = ImageTk.PhotoImage(self.pil)
