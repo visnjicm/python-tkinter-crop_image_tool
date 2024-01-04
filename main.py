@@ -30,6 +30,14 @@ def KeyPress(event):
         img.x, img.y = 0, 0
         update_canvas(img.x, img.y)
 
+def draw_rectangle(event):
+    canvas.delete('rect_placeholder')
+    if img.rect_x0 is not None and img.rect_y0 is not None:
+        canvas.create_rectangle(img.rect_x0, img.rect_y0, event.x, event.y,
+                                tags='rect_placeholder')
+
+
+
 
 def WKey(event):
     img.y += 20
@@ -97,12 +105,15 @@ if __name__ == "__main__":
     root.bind("<a>", AKey)
     root.bind("<s>", SKey)
     root.bind("<d>", DKey)
-
     root.bind("<Button-1>", LeftClick)
     root.bind("<Button-2>", MiddleClick)
     root.bind("<Button-3>", RightClick)
-
     root.bind('<KeyPress>', KeyPress)
+    root.bind('<Motion>', draw_rectangle)
+
+
+
+
     canvas = tk.Canvas(root, width=1280, height=720)
     canvas.pack()
     canvas.image = img.return_tk()

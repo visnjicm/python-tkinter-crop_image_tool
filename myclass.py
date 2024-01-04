@@ -9,10 +9,10 @@ class MyTkImage:
         self.tk_img = ImageTk.PhotoImage(Image.open(fp))
         self.x = 0
         self.y = 0
-        self.rect_x0 = 0
-        self.rect_x1 = 100
-        self.rect_y0 = 0
-        self.rect_y1 = 100
+        self.rect_x0 = None
+        self.rect_x1 = None
+        self.rect_y0 = None
+        self.rect_y1 = None
         self.init_width = self.pil.width
         self.init_height = self.pil.height
 
