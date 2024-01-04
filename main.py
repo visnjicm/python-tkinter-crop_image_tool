@@ -31,10 +31,11 @@ def KeyPress(event):
         update_canvas(img.x, img.y)
 
 def draw_rectangle(event):
-    canvas.delete('rect_placeholder')
-    if img.rect_x0 is not None and img.rect_y0 is not None:
+    if img.rect_x0 is not None and img.rect_y0 is not None\
+            and img.rect_x1 is None and img.rect_y1 is None:
+        canvas.delete('rectangle')
         canvas.create_rectangle(img.rect_x0, img.rect_y0, event.x, event.y,
-                                tags='rect_placeholder')
+                                tags='rectangle')
 
 
 
@@ -72,28 +73,29 @@ def DKey(event):
 
 
 def LeftClick(event):
-    # print(event)
     img.rect_x0 = event.x
     img.rect_y0 = event.y
 
 
 def MiddleClick(event):
-    # print(event)
-    canvas.create_rectangle(img.rect_x0, img.rect_y0, img.rect_x1, img.rect_y1)
-    # print(img.rect_x0, img.rect_y0, img.rect_x1, img.rect_y1)
-    # print(img.x, img.y)
-    cropped_coordinates = (img.rect_x0 - img.x, img.rect_y0 - img.y,
-                           img.rect_x1 - img.x, img.rect_y1 - img.y)
-    new_img = img.pil.crop(cropped_coordinates)
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    file_path = f"files/output_{timestamp}.png"
-    new_img.save(fp=file_path)
+    img.rect_x0, img.rect_x1 = None, None
+    img.rect_y0, img.rect_y1 = None, None
+    update_canvas(img.x, img.y)
+
+    # cropped_coordinates = (img.rect_x0 - img.x, img.rect_y0 - img.y,
+    #                        img.rect_x1 - img.x, img.rect_y1 - img.y)
+    # new_img = img.pil.crop(cropped_coordinates)
+    # timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    # file_path = f"files/output_{timestamp}.png"
+    # new_img.save(fp=file_path)
 
 
 def RightClick(event):
-    # print(event)
+    canvas.delete('rectangle')
     img.rect_x1 = event.x
     img.rect_y1 = event.y
+    canvas.create_rectangle(img.rect_x0, img.rect_y0,
+                            img.rect_x1, img.rect_y1, tags='rectangle')
 
 
 if __name__ == "__main__":
