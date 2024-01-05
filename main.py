@@ -24,10 +24,12 @@ def KeyPress(event):
         img.zoom_in(1.3)
         update_canvas(img.x, img.y)
 
-    # reset image keybind
+    # reset keybind
     if event.char == '0':
         img.zoom_reset()
         img.x, img.y = 0, 0
+        img.rect_x0, img.rect_x1 = None, None
+        img.rect_y0, img.rect_y1 = None, None
         update_canvas(img.x, img.y)
 
 def draw_rectangle(event):
