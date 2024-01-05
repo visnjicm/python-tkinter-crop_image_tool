@@ -75,19 +75,36 @@ def DKey(event):
 def LeftClick(event):
     img.rect_x0 = event.x
     img.rect_y0 = event.y
+    img.rect_x1 = None
+    img.rect_y1 = None
 
 
 def MiddleClick(event):
-    img.rect_x0, img.rect_x1 = None, None
-    img.rect_y0, img.rect_y1 = None, None
-    update_canvas(img.x, img.y)
 
-    # cropped_coordinates = (img.rect_x0 - img.x, img.rect_y0 - img.y,
-    #                        img.rect_x1 - img.x, img.rect_y1 - img.y)
-    # new_img = img.pil.crop(cropped_coordinates)
-    # timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    # file_path = f"files/output_{timestamp}.png"
-    # new_img.save(fp=file_path)
+    print(img.rect_x0, img.rect_y0, img.rect_x1, img.rect_y1)
+
+    if img.rect_y0<img.rect_y1:
+        upper = img.rect_y0
+        lower = img.rect_y1
+    else:
+        upper = img.rect_y1
+        lower = img.rect_y0
+
+    if img.rect_x0 < img.rect_x1:
+        left = img.rect_x0
+        right = img.rect_x1
+    else:
+        left = img.rect_x1
+        right = img.rect_x0
+
+    new_img = img.pil.crop((left,upper,right,lower))
+
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    file_path = f"files/output_{timestamp}.png"
+
+    new_img.save(fp=file_path)
+
+    update_canvas(img.x, img.y)
 
 
 def RightClick(event):
