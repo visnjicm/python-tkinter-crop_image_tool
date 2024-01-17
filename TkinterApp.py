@@ -74,8 +74,13 @@ class TkinterApp():
     def _middle_click(self, event):
         print(self.rect_x0, self.rect_y0, self.rect_x1, self.rect_y1)
         print(self.img.x, self.img.y)
-        cropped_coordinates = (self.rect_x0 - self.img.x, self.rect_y0 - self.img.y,
-                               self.rect_x1 - self.img.x, self.rect_y1 - self.img.y)
+
+        left, right = (self.rect_x0, self.rect_x1) if self.rect_x0 < self.rect_x1 else (self.rect_x1, self.rect_x0)
+        up, down = (self.rect_y0, self.rect_y1) if self.rect_y0 < self.rect_y1 else (self.rect_y1, self.rect_y0)
+
+        cropped_coordinates = (left - self.img.x, up - self.img.y,
+                               right - self.img.x, down - self.img.y)
+
         new_img = self.img.pil.crop(cropped_coordinates)
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         file_path = f"files/output_{timestamp}.png"
