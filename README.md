@@ -7,6 +7,7 @@ How to use
 Download project folder, and run python3 main.py inside folder with all the .py files.
 
 Controls:
+
 W,A,S,D - movement
 '-' and '+' - zoom out an zoom in
 '0' - reset picture position and zoom
