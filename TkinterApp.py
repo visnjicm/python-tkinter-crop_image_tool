@@ -15,41 +15,41 @@ class TkinterApp():
         self.canvas.create_rectangle(self.rect_x0, self.rect_y0, self.rect_x1, self.rect_y1, tags="rectangle")
 
     def _key_press(self, event):
-        if event.char == '-':
+        if event.char == '-' or event.char == "_":
             self.img.zoom_out(1.3)
 
-        if event.char == '=':
+        if event.char == '=' or event.char == "+":
             self.img.zoom_in(1.3)
 
-        if event.char == '0':
+        if event.char == '0' or event.char == ')':
             self.img.zoom_reset()
             self.canvas.delete("rectangle")
             self.x0_y0_set = False
             self.x1_y1_set = False
             self.img.x, self.img.y = 0, 0
 
-        if event.char == 'w':
+        if event.char == 'w' or event.char == 'W':
             self.img.y += 20
             if 0 > self.img.y > (720 - self.img.pil.height):
                 pass
             else:
                 self.img.y -= 20
 
-        if event.char == 'a':
+        if event.char == 'a' or event.char == 'A':
             self.img.x -= 20
             if 0 > self.img.x > (1280 - self.img.pil.width):
                 pass
             else:
                 self.img.x += 20
 
-        if event.char == 's':
+        if event.char == 's' or event.char == 'S':
             self.img.y -= 20
             if 0 > self.img.y > (720 - self.img.pil.height):
                 pass
             else:
                 self.img.y += 20
 
-        if event.char == 'd':
+        if event.char == 'd' or event.char == 'D':
             self.img.x += 20
             if 0 > self.img.x > (1280 - self.img.pil.width):
                 pass
