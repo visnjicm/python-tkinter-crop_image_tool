@@ -83,7 +83,7 @@ class TkinterApp():
 
         new_img = self.img.pil.crop(cropped_coordinates)
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        file_path = f"files/output_{timestamp}.png"
+        file_path = f"output/output_{timestamp}.png"
         new_img.save(fp=file_path)
         self._update_canvas()
         self.x0_y0_set = False
